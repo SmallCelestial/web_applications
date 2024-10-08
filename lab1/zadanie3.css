@@ -1,0 +1,39 @@
+.rectangle {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: 10px;
+}
+
+.container{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.row1 {
+    display: flex;
+    padding: 10px;
+}
+
+.row2 {
+    display: flex;
+    padding: 10px;
+}
+
+.color1{
+    background-color: black;
+}
+
+.color2{
+    background-color: yellow;
+}
+
+.color3{
+    background-color: violet;
+}
+
+.color4{
+    background-color: red;
+}
