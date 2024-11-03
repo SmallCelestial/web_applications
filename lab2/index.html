@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>main_screen</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+
+<nav class="nav">
+    <ul class="nav__list">
+        <li class="nav__item">
+            <a href="#" onclick="loadContent('home.html', this)" class="nav__link">Home</a>
+        </li>
+        <li class="nav__item">
+            <a href="#" onclick="loadContent('contact.html', this)" class="nav__link">Contact</a>
+        </li>
+        <li class="nav__item">
+            <a href="#" onclick="loadContent('photos.html', this)" class="nav__link">Photos</a>
+        </li>
+    </ul>
+</nav>
+
+<main class="main" id="content">
+</main>
+
+<footer class="footer">
+    <a href="#" class="nav__logo">Mateusz Oracz</a>
+</footer>
+
+<script>
+    function loadContent(page, link) {
+        fetch(page)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('content').innerHTML = data;
+
+                const links = document.querySelectorAll('.nav__link');
+                links.forEach(l => l.classList.remove('active-link'));
+                link.classList.add('active-link');
+            })
+            .catch(error => {
+                console.error('Error loading content:', error);
+                document.getElementById('content').innerHTML = "<p>Error loading content. Please try again.</p>";
+            });
+    }
+
+    window.onload = () => loadContent('home.html', document.querySelector('.nav__link'));
+
+</script>
+</body>
+</html>

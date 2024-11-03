@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photos</title>
+    <link rel="stylesheet" href="photos.css">
+</head>
+<body>
+<h1>Photos</h1>
+<div class="gallery">
+    <video controls class="gallery__video">
+        <source src="photos/video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <img src="photos/photo1.jpg" alt="Photo 1" class="gallery__img">
+    <img src="photos/photo2.jpg" alt="Photo 2" class="gallery__img">
+    <img src="photos/photo3.jpg" alt="Photo 3" class="gallery__img">
+    <img src="photos/photo4.jpg" alt="Photo 4" class="gallery__img">
+    <img src="photos/photo5.jpg" alt="Photo 5" class="gallery__img">
+    <img src="photos/photo6.jpg" alt="Photo 6" class="gallery__img">
+    <img src="photos/photo7.jpg" alt="Photo 7" class="gallery__img">
+    <img src="photos/photo8.jpg" alt="Photo 8" class="gallery__img">
+    <img src="photos/photo9.jpg" alt="Photo 9" class="gallery__img">
+    <img src="photos/photo10.jpg" alt="Photo 10" class="gallery__img">
+    <img src="photos/photo11.jpg" alt="Photo 11" class="gallery__img">
+    <img src="photos/photo12.jpg" alt="Photo 12" class="gallery__img">
+    <img src="photos/photo13.jpg" alt="Photo 13" class="gallery__img">
+</div>
+
+<div id="lightbox" class="lightbox">
+    <span class="lightbox__close">&times;</span>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="Enlarged Photo">
+    <video class="lightbox__video" id="lightboxVideo" controls>
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const closeBtn = document.querySelector('.lightbox__close');
+
+    document.querySelectorAll('.gallery__img, .gallery__video').forEach(item => {
+        item.addEventListener('click', event => {
+            lightbox.style.display = 'flex';
+
+            if (event.target.tagName === 'IMG') {
+                lightboxImg.src = event.target.src;
+                lightboxImg.style.display = 'block';
+                lightboxVideo.style.display = 'none';
+            } else if (event.target.tagName === 'VIDEO') {
+                lightboxVideo.querySelector('source').src = event.target.querySelector('source').src;
+                lightboxVideo.load();
+                lightboxVideo.style.display = 'block';
+                lightboxImg.style.display = 'none';
+            }
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+        lightboxVideo.querySelector('source').src = '';
+        lightboxVideo.pause();
+    });
+</script>
+</body>
+</html>
