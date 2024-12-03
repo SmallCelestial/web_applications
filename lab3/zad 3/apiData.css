@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f5f5f5;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+#filterInput {
+    padding: 8px;
+    font-size: 14px;
+    width: 300px;
+}
+
+#sortSelect {
+    padding: 8px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+thead {
+    background-color: #007BFF;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+img {
+    width: 50px;
+    height: auto;
+    display: block;
+}

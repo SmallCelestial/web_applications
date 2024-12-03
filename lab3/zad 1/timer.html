@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Timer</title>
+    <link rel="stylesheet" href="timer.css">
+</head>
+<body>
+<div class="container">
+    <button type="button" id="start">Start</button>
+    <button type="button" id="stop" onclick="pause()">Stop</button>
+    <button type="reset" id="reset" onclick="reset()">Reset</button>
+    <div id="timer">0s</div>
+</div>
+
+<script>
+    var timer;
+    var element = document.getElementById('timer');
+    var sec = 0;
+
+    function start(){
+        document.getElementById("start").removeEventListener("click", start);
+
+        timer = setInterval( () => {
+            if(sec < 60){
+                element.innerHTML = '' + sec + 's';
+            }
+            else{
+                var minutes = Math.floor(sec / 60)
+                var seconds = sec - minutes*60
+                element.innerHTML = '' + minutes + 'min ' + seconds + 's';
+            }
+            sec++;
+        }, 1000);
+        }
+
+    function pause(){
+        clearInterval(timer)
+        document.getElementById("start").addEventListener("click", start);
+    }
+
+    function reset(){
+        sec = 0;
+        element.innerHTML = '0s';
+    }
+
+    document.getElementById("start").addEventListener("click", start);
+</script>
+</body>
+</html>

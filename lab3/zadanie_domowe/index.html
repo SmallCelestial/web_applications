@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie Shooter Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="game">
+    <div id="lives">
+        <img src="full_heart.png" alt="Life" id="life1">
+        <img src="full_heart.png" alt="Life" id="life2">
+        <img src="full_heart.png" alt="Life" id="life3">
+    </div>
+
+    <div id="score">0</div>
+
+    <div id="game-board">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="game-over-popup" class="hidden">
+        <p>Game Over!</p>
+        <p>Your Score: <span id="final-score"></span></p>
+        <button id="restart-button">Restart Game</button>
+    </div>
+</div>
+
+<audio id="sad-music" src="sad-music.mp3" loop></audio>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Data Table</title>
+  <link rel="stylesheet" href="apiData.css">
+</head>
+<body>
+<div class="controls">
+  <input type="text" id="filterInput" placeholder="Search by title or description...">
+
+  <select id="sortSelect">
+    <option value="original">Original Order</option>
+    <option value="asc">Sort A-Z</option>
+    <option value="desc">Sort Z-A</option>
+  </select>
+</div>
+
+<table id="dataTable">
+  <thead>
+  <tr>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  const API_URL = "https://dummyjson.com/products";
+
+  async function fetchData() {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      return data.products.slice(0, 30); // Pierwsze 30 elementów
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  function renderTable(data) {
+    const tableBody = document.getElementById("dataTable").querySelector("tbody");
+    tableBody.innerHTML = "";
+
+    data.forEach(item => {
+      const row = document.createElement("tr");
+
+      const imgCell = document.createElement("td");
+      const img = document.createElement("img");
+      img.src = item.thumbnail;
+      img.alt = item.title;
+      imgCell.appendChild(img);
+      row.appendChild(imgCell);
+
+      const titleCell = document.createElement("td");
+      titleCell.textContent = item.title;
+      row.appendChild(titleCell);
+
+      const descCell = document.createElement("td");
+      descCell.textContent = item.description;
+      row.appendChild(descCell);
+
+      tableBody.appendChild(row);
+    });
+  }
+
+  function filterData(data, filterText) {
+    return data.filter(item =>
+            item.title.toLowerCase().includes(filterText) ||
+            item.description.toLowerCase().includes(filterText)
+    );
+  }
+
+  function sortData(data, sortOrder) {
+    if (sortOrder === "asc") {
+      return [...data].sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortOrder === "desc") {
+      return [...data].sort((a, b) => b.title.localeCompare(a.title));
+    } else {
+      return data;
+    }
+  }
+
+  async function init() {
+    const allData = await fetchData();
+    let filteredData = [...allData];
+
+    const filterInput = document.getElementById("filterInput");
+    const sortSelect = document.getElementById("sortSelect");
+
+    renderTable(filteredData);
+
+    filterInput.addEventListener("input", () => {
+      const filterText = filterInput.value.toLowerCase();
+      const sortedData = sortData(allData, sortSelect.value);
+      filteredData = filterData(sortedData, filterText);
+      renderTable(filteredData);
+    });
+
+    sortSelect.addEventListener("change", () => {
+      const filterText = filterInput.value.toLowerCase();
+      const sortedData = sortData(allData, sortSelect.value);
+      filteredData = filterData(sortedData, filterText);
+      renderTable(filteredData);
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>

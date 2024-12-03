@@ -1,0 +1,20 @@
+button {
+    border-radius: 10%;
+    color: black;
+    background-color: #777777;
+    padding: 15px 32px;
+    text-align: center;
+    /*text-decoration: none;*/
+    /*display: inline-block;*/
+    font-size: 16px;
+    /*margin: 4px 2px;*/
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+#timer{
+    background: #fff;
+    color: #000;
+    width: 100px;
+    margin: 50px auto;
+}
